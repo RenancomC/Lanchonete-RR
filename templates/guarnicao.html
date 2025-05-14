@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h2 class="texto-index">ACOMPANHAMENTO</h2>
+
+<div class="grid-container-index">
+    {% for valor in tabela %}
+    <a class="index-a" href="/infoProduto/{{ valor.id }}">
+        <div class="produto">
+            <img src="{{ url_for('static', filename='img/' ~ valor.img)}}" alt="{{ valor.nomeLanche }}">
+            <p class="index-p">{{ valor.nomeLanche }}</p>
+            <p>R$ {{ valor.valor }}</p>
+        </div>
+    </a>
+    {% endfor %}
+</div>
+
+
+{% endblock%}
+    

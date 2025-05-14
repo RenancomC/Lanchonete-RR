@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<div class="container-dp">
+    <h2 class="titulo_dp">Dados do Usuário</h2>
+    <form method="POST" action="{{ url_for('dadoPessoal') }}">
+        <label for="nome">Nome:</label><br>
+        <input class="input-dp" type="text" id="nome" name="nome" value="{{ usuario.nome }}" disabled required><br>
+
+        <label for="email">Email:</label><br>
+        <input class="input-dp" type="email" id="email" name="email" value="{{ usuario.email }}" disabled required><br>
+
+        <label for="cpf">CPF:</label><br>
+        <input class="input-dp" type="text" id="cpf" name="cpf" value="{{ usuario.cpf }}" disabled><br>
+
+        <label for="senha">Senha:</label><br>
+        <input class="input-dp" type="password" id="senha" name="senha" value="{{ usuario.senha }}" disabled
+            required><br>
+
+        <label for="cep">CEP:</label><br>
+        <input class="input-dp" type="text" id="cep" name="cep" value="{{ usuario.cep or '' }}" disabled required><br>
+
+        <label for="endereco">Endereço:</label><br>
+        <input class="input-dp" type="text" id="endereco" name="endereco" value="{{ usuario.endereco or '' }}" disabled
+            required><br>
+
+        <!-- Botões -->
+        <div class="botoes">
+            <button type="button" id="btn-editar">Atualizar Dados</button>
+
+            <div id="botoes-confirmar-cancelar" style="display: none;">
+                <button type="submit" id="btn-confirmar">Confirmar</button>
+                <button type="button" id="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+{% endblock%}

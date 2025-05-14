@@ -1,0 +1,36 @@
+{% extends 'base01.html' %}
+
+{% block conteudo %}
+
+    <div class="container-cadastro">
+        <h2 class="titulo-cadastro">Cadastro</h2>
+
+        {% with messages = get_flashed_messages(with_categories='cadastro') %}
+        {% if messages %}
+        {% for msg in messages %}
+        <div class="mensagem-cadastro">{{ msg }}</div>
+        {% endfor %}
+        {% endif %}
+        {% endwith %}
+
+        <form method="POST" action="{{ url_for('cadastro') }}">
+            <label for="nome">Nome:</label><br>
+            <input class="input-cadastro" type="text" id="nome" name="nome" required><br>
+
+            <label for="email">E-mail:</label><br>
+            <input class="input-cadastro" type="email" id="email" name="email" required><br>
+
+            <label for="cpf">CPF:</label><br>
+            <input class="input-cadastro" type="text" id="cpf" name="cpf" maxlength="14" required><br>
+
+            <label for="senha">Senha:</label><br>
+            <input class="input-cadastro" type="password" id="senha" name="senha" required><br>
+
+            <label for="confirmar_senha">Confirmar Senha:</label><br>
+            <input class="input-cadastro" type="password" id="confirmar_senha" name="confirmar_senha" required><br>
+
+            <button class="button-cadastro" type="submit">Cadastrar</button>
+        </form>
+    </div>
+
+{% endblock%}

@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete RR</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/R.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Trade+Winds&display=swap" rel="stylesheet">
+</head>
+
+<body>
+    <div class="sidebar-container">
+        <div class="sidebar">
+            <div class="perfil-container">
+                <div class="fotoPerfil"></div>
+                <div class="login">
+                    {% if 'usuario_id' not in session %}
+                    <a class="index-log-cad" href="/login">Login/Cadastro</a>
+                    {% else %}
+                    <a href="/dadoPessoal">Perfil</a>
+                    <a href="{{ url_for('logout') }}">Sair</a>
+                    {% endif %}
+                </div>
+            </div>
+            <nav>
+                <ul id="navegacao">
+                    <li class="nav"><a class="menu" href="/index"><img class="nav-imagem"
+                                src="{{ url_for('static', filename='img/home.png')}}"></a></li>
+                    <li class="nav-lanche"><a class="menu" href="/lanche"><img class="nav-imagem"
+                                src="{{ url_for('static', filename='img/lanche.png')}}"></a></li>
+                    <li class="nav"><a class="menu" href="/bebida"><img class="nav-imagem"
+                                src="{{ url_for('static', filename='img/bebida.png')}}"></a></li>
+                    <li class="nav"><a class="menu" href="/sobremesa"><img class="nav-imagem"
+                                src="{{ url_for('static', filename='img/doce.png')}}"></a></li>
+                    <li class="nav"><a class="menu" href="/guarnicao"><img class="nav-imagem"
+                                src="{{ url_for('static', filename='img/guarnicao.png')}}"></a></li>
+                    <li class="nav"><a class="menu" href="/carrinho"><img class="nav-imagem"
+                                src="{{ url_for('static', filename='img/carrinho.png')}}"></a></li>
+                </ul>
+            </nav>
+        </div>
+
+    </div>
+
+    <div class="conteudo">
+        <header>
+            <div class="header-principal">
+                <img class="header-logo" src="{{ url_for('static', filename='img/R.ico')}}" alt="Logo da lanchonete">
+                <div class="header-texto">
+                    <h1 class="header-nome-lanchonete">Lanchonete RR</h1>
+                    <div class="slogan">Sabor que conquista na primeira mordida!</div>
+                </div>
+                <div class="header-img-efeito">
+                    <div class="header-img-efeito-texto">
+                        <p class="slogan-img p01">VENHA VIVER ESSA</p><br>
+                        <p class="slogan-img p02">EXPERIÊNCIA!!!</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+
+
+        <main>
+            {% block conteudo %}
+            {% endblock %}
+        </main>
+
+
+        <footer>
+            <div class="footer-principal">
+                <p><img class="footer-logo" src="{{ url_for('static', filename='img/R.ico')}}"
+                        alt="logo da lanchonete"><strong>LanchoneteRR</strong></p>
+                <p>&copy; 2025 Lanchonete R.R. Todos os direitos reservados.</p>
+            </div>
+        </footer>
+    </div>
+
+
+    <!-- Carregar script.js da pasta static/js -->
+    <script src="{{ url_for('static', filename='js/codigo.js') }}"></script>
+
+</body>
+
+</html>

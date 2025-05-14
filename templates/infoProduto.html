@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block conteudo %}
+
+<h1 class="h1-infoproduto">{{ produto.nomeLanche }}</h1>
+
+<div class="conteudo-grid-infoproduto">
+    <img src="{{ url_for('static', filename='img/' ~ produto.img) }}" alt="{{ produto.nomeLanche }}">
+    <p>{{ produto.descricao }}</p>
+    <p><strong>Valor:</strong> R$ {{ produto.valor }}</p>
+</div>
+
+<form action="{{ url_for('adicionar_carrinho') }}" method="POST" class="acoes">
+    <input type="hidden" name="nome" value="{{ produto.nomeLanche }}">
+    <input type="hidden" name="valor" value="{{ produto.valor }}">
+    
+    <label for="quantidade">Quantidade:</label>
+    <input type="number" id="quantidade" name="quantidade" min="1" max="10" value="1" required>
+    
+    <button type="submit">Adicionar ao Carrinho</button>
+</form>
+{% endblock%}
+    

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lanchonete RR</title>
+    <link rel="icon" href="{{ url_for('static', filename='img/R.ico') }}" type="image/x-icon">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/estilo.css')}}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Knewave&family=Trade+Winds&display=swap" rel="stylesheet">
+
+</head>
+
+<body class="cadastro-login">
+    <main>
+        {% block conteudo %}
+        {% endblock %}
+    </main>
+
+    <script src="{{ url_for('static', filename='js/codigo.js') }}"></script>
+
+</body>
+
+</html>
