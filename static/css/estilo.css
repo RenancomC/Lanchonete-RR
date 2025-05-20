@@ -295,7 +295,7 @@ body {
 .produto img {
     width: 100px;
     height: 100px;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 8px;
     transition: transform 0.3s ease-in-out;
 }
@@ -477,6 +477,7 @@ body {
     .conteudo-grid-infoproduto img {
         width: 500px;
         height: 500px;
+        object-fit: contain;
     }
 
     .conteudo-grid-infoproduto p:first-of-type {
