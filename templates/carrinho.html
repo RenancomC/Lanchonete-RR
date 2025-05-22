@@ -13,40 +13,56 @@
 
 {% if session.carrinho %}
 {% set ns = namespace(total=0) %}
-    {% for item in session.carrinho %}
-    <div class="grid-carrinho">
-            <span class="corpo-carrinho">{{ item.quantidade }}</span>
-            <span class="corpo-carrinho">{{ item.nome }}</span>
-            <span class="corpo-carrinho">R$ {{ '%.2f' | format(item.total) }}</span>
-            <span class="corpo-carrinho">
-                <!-- ➖ Remover 1 unidade -->
-                <form action="{{ url_for('atualizar_quantidade') }}" method="POST" style="display:inline;">
-                    <input type="hidden" name="index" value="{{ loop.index0 }}">
-                    <input type="hidden" name="acao" value="remover">
-                    <button class="menos-carrinho" type="submit">➖</button>
-                </form>
+{% for item in session.carrinho %}
+<div class="grid-carrinho">
+    <span class="corpo-carrinho">{{ item.quantidade }}</span>
+    <span class="corpo-carrinho">{{ item.nome }}</span>
+    <span class="corpo-carrinho">R$ {{ '%.2f' | format(item.total) }}</span>
+    <span class="corpo-carrinho">
+        <!-- ➖ Remover 1 unidade -->
+        <form action="{{ url_for('atualizar_quantidade') }}" method="POST" style="display:inline;">
+            <input type="hidden" name="index" value="{{ loop.index0 }}">
+            <input type="hidden" name="acao" value="remover">
+            <button class="menos-carrinho" type="submit">➖</button>
+        </form>
 
-                <!-- ➕ Adicionar 1 unidade -->
-                <form action="{{ url_for('atualizar_quantidade') }}" method="POST" style="display:inline;">
-                    <input type="hidden" name="index" value="{{ loop.index0 }}">
-                    <input type="hidden" name="acao" value="adicionar">
-                    <button class="mais-carrinho" type="submit">➕</button>
-                </form>
+        <!-- ➕ Adicionar 1 unidade -->
+        <form action="{{ url_for('atualizar_quantidade') }}" method="POST" style="display:inline;">
+            <input type="hidden" name="index" value="{{ loop.index0 }}">
+            <input type="hidden" name="acao" value="adicionar">
+            <button class="mais-carrinho" type="submit">➕</button>
+        </form>
 
-                <!-- 🗑️ Remover item completamente -->
-                <form action="{{ url_for('remover_item') }}" method="POST" style="display:inline;">
-                    <input type="hidden" name="index" value="{{ loop.index0 }}">
-                    <button class="remover-carrinho" type="submit">🗑️</button>
-                </form>
-            </span>
+        <!-- 🗑️ Remover item completamente -->
+        <form action="{{ url_for('remover_item') }}" method="POST" style="display:inline;">
+            <input type="hidden" name="index" value="{{ loop.index0 }}">
+            <button class="remover-carrinho" type="submit">🗑️</button>
+        </form>
+    </span>
+</div>
+{% set ns.total = ns.total + item.total %}
+{% endfor %}
+<p class="carrinho-texto"><strong>Total: R$ {{ '%.2f' | format(ns.total) }}</strong></p>
+
+<div class=".container-botao-carrinho">
+    <button class="botao-carrinho" onclick="mostrarDiv()">Realizar Pagamento</button>
+</div>
+
+<div id="tela-inteira">
+    <div id="conteudo-central">
+        <button id="fechar" onclick="fecharDiv()">Fechar</button>
+        <h1>Área de Pagamento</h1>
+        <p>Valor Total: R$ {{ '%.2f' | format(ns.total) }}</p>
+        <button id="gerarBtn">Gerar QR Code</button>
+        <div id="qrcode"></div>
+        <button id="pagarBtn" style="display:none; margin-top: 10px;">Confirmar Pagamento</button>
+        <div id="mensagem"></div>
     </div>
-    {% set ns.total = ns.total + item.total %}
-    {% endfor %}
-<p><strong>Total: R$ {{ '%.2f' | format(ns.total) }}</strong></p>
+</div>
 
 
 {% else %}
-<p>Seu carrinho está vazio.</p>
+<p class="carrinho-texto">Seu carrinho está vazio.</p>
 {% endif %}
 
 {% endblock%}
